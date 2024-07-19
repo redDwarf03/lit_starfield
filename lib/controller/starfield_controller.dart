@@ -1,4 +1,4 @@
-import 'dart:math' as Math;
+import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:lit_starfield/model/star.dart';
 
@@ -9,6 +9,18 @@ import 'package:lit_starfield/model/star.dart';
 /// be restarted in order for the [StarfieldController] to be initialized
 /// using the updated configuration.
 class StarfieldController {
+  /// Creates a [StarfieldController].
+
+  StarfieldController({
+    required this.number,
+    required this.size,
+    required this.depth,
+    required this.velocity,
+    required this.scale,
+  }) {
+    init();
+  }
+
   /// The number of stars to be displayed.
   final int number;
 
@@ -27,43 +39,31 @@ class StarfieldController {
   /// States which scale to apply on each star.
   final double scale;
 
-  /// Creates a [StarfieldController].
-
-  StarfieldController({
-    required this.number,
-    required this.size,
-    required this.depth,
-    required this.velocity,
-    required this.scale,
-  }) {
-    init();
-  }
-
   double absoluteVelocity = 0;
 
   /// The random instance used to create aberrations of the given center point,
   /// therefore making the [Star]s appear on different locations.
-  late Math.Random random;
+  late math.Random random;
 
   /// The [List] of [Star] objects which will be part of the starfield.
   late List<Star> stars = [];
 
   /// Returns a revised depth (0-1) based on the provided depth.
   double get revisedDepth {
-    const double thresholdMin = 0.1;
-    const double thresholdMax = 1.0;
+    const thresholdMin = 0.1;
+    const thresholdMax = 1.0;
 
     // If the depth exceeds the minimum
     if (depth > thresholdMax) {
       // Return the lower threshold as base depth
-      return ((thresholdMax) - 1.0).abs();
+      return (thresholdMax - 1.0).abs();
     }
     // If the depth exceeds the maximum
     if (depth < thresholdMin) {
       // Return the upper threshold as base depth
-      return ((thresholdMin) - 1.0).abs();
+      return (thresholdMin - 1.0).abs();
     }
-    return ((depth) - 1.0).abs();
+    return (depth - 1.0).abs();
   }
 
   /// Returns the view port's center point.
@@ -73,7 +73,7 @@ class StarfieldController {
 
   /// Returns the larger view port axis (x,y).
   double get maxAxisLength {
-    return Math.max(size.width, size.height);
+    return math.max(size.width, size.height);
   }
 
   /// Returns the larger view port axis (x,y) as an absolute value.
@@ -103,17 +103,19 @@ class StarfieldController {
   /// appear moving towards the screen.
   void transformStar(Star star) {
     // Transform
-    star.translatedOffset =
-        Offset((star.dx / star.dz + center.dx), star.dy / star.dz + center.dy);
-    // Slowly move the star to the size edges.
-    star.dz -= star.baseDepth;
+    star
+      ..translatedOffset =
+          Offset(star.dx / star.dz + center.dx, star.dy / star.dz + center.dy)
+      // Slowly move the star to the size edges.
+      ..dz -= star.baseDepth;
 
     // If the star's z point is closer to the screen than the base depth
     if (star.dz < star.baseDepth) {
       // Accelerate it
-      final Math.Random random = Math.Random();
-      star.dz = random.nextDouble() * absoluteVelocity + absoluteVelocity;
-      star.radius = scale;
+      final random = math.Random();
+      star
+        ..dz = random.nextDouble() * absoluteVelocity + absoluteVelocity
+        ..radius = scale;
       // Else only adjust the radius to create a 'flicker' effect.
     } else {
       star.radius = ((absoluteVelocity / 8) / star.dz + star.baseDepth) * scale;
@@ -128,11 +130,11 @@ class StarfieldController {
       return maxAxisLengthAbs;
     }
 
-    double maxDiff = velocity - maxAxisLengthAbs;
+    final maxDiff = velocity - maxAxisLengthAbs;
 
-    double maxDiffAb = maxDiff.abs() - (maxAxisLengthAbs - 1);
+    final maxDiffAb = maxDiff.abs() - (maxAxisLengthAbs - 1);
 
-    double velo = (maxDiffAb * (maxAxisLengthAbs / 4) + 1);
+    final velo = maxDiffAb * (maxAxisLengthAbs / 4) + 1;
 
     return velo;
   }
@@ -147,10 +149,10 @@ class StarfieldController {
     absoluteVelocity = calcAbsVelo(velocity);
 
     for (var i = 0; i < number; i++) {
-      random = Math.Random();
-      double dx = (random.nextDouble() * minX) - minX / 2;
-      double dy = (random.nextDouble() * maxY) - maxY / 2;
-      double dz = (random.nextDouble() * absoluteVelocity) + absoluteVelocity;
+      random = math.Random();
+      final dx = (random.nextDouble() * minX) - minX / 2;
+      final dy = (random.nextDouble() * maxY) - maxY / 2;
+      final dz = (random.nextDouble() * absoluteVelocity) + absoluteVelocity;
       stars.add(
         Star(
           baseDepth: revisedDepth,

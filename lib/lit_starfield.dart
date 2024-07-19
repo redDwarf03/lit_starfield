@@ -9,6 +9,6 @@
 
 library lit_starfield;
 
-export 'view.dart';
 export 'controller.dart';
 export 'model.dart';
+export 'view.dart';

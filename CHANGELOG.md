@@ -1,5 +1,9 @@
 ## 0.1.1
 
+- Migrate to flutter 3.22
+
+## 0.1.1
+
 - Adjust `description` on `pubspec.yaml`.
 
 ## 0.1.0

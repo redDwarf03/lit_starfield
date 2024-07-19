@@ -10,7 +10,7 @@ class LitStarfieldContainer extends StatefulWidget {
   /// Creates a [LitStarfieldContainer].
 
   const LitStarfieldContainer({
-    Key? key,
+    super.key,
     this.animated = true,
     this.number = 400,
     this.velocity = 0.7,
@@ -27,7 +27,7 @@ class LitStarfieldContainer extends StatefulWidget {
         end: Alignment.bottomLeft,
       ),
     ),
-  }) : super(key: key);
+  });
 
   /// States whether or not the starfield should be animated.
   final bool animated;
@@ -56,10 +56,10 @@ class LitStarfieldContainer extends StatefulWidget {
   /// The container's background decoration.
   final BoxDecoration backgroundDecoration;
   @override
-  _LitStarfieldContainerState createState() => _LitStarfieldContainerState();
+  LitStarfieldContainerState createState() => LitStarfieldContainerState();
 }
 
-class _LitStarfieldContainerState extends State<LitStarfieldContainer>
+class LitStarfieldContainerState extends State<LitStarfieldContainer>
     with TickerProviderStateMixin {
   /// Controller to build the starfield's data layer.
   late StarfieldController _controller;
@@ -76,15 +76,16 @@ class _LitStarfieldContainerState extends State<LitStarfieldContainer>
 
     _starfieldAnimation = AnimationController(
       vsync: this,
-      duration: Duration(
+      duration: const Duration(
         seconds: 20,
       ),
     );
 
-    _starfieldAnimation.repeat(reverse: false);
+    _starfieldAnimation.repeat();
   }
 
   /// Sets the [moved] value.
+  // ignore: use_setters_to_change_properties
   void setMoved(bool value) {
     moved = value;
   }
@@ -115,7 +116,7 @@ class _LitStarfieldContainerState extends State<LitStarfieldContainer>
     return AnimatedBuilder(
       animation: _starfieldAnimation,
       builder: (BuildContext context, Widget? _) {
-        return Container(
+        return DecoratedBox(
           decoration: widget.backgroundDecoration,
           child: SizedBox(
             height: MediaQuery.of(context).size.height,

@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:lit_starfield/lit_starfield.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
-  _MyAppState createState() => _MyAppState();
+  MyAppState createState() => MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: _HomeScreen(),
     );
   }
@@ -29,15 +29,15 @@ class _HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: Center(
+        title: const Center(
           child: Text(
-            "LitStarfieldDemo",
+            'LitStarfieldDemo',
             textAlign: TextAlign.center,
             style: TextStyle(color: Colors.white),
           ),
         ),
       ),
-      body: LitStarfieldImpl(),
+      body: const LitStarfieldImpl(),
     );
   }
 }
@@ -47,6 +47,6 @@ class LitStarfieldImpl extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LitStarfieldContainer();
+    return const LitStarfieldContainer();
   }
 }

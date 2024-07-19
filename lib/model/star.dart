@@ -4,6 +4,17 @@ import 'package:flutter/painting.dart';
 ///
 /// Each single [Star] which will be part the starfield.
 class Star {
+  /// Creates a [Star].
+  ///
+  /// It will be used to compound the starfield.
+  Star({
+    required this.baseDepth,
+    required this.baseVelocity,
+    required this.dx,
+    required this.dy,
+    required this.dz,
+  });
+
   /// The base velocity the [Star] will travel at.
   final double baseDepth;
 
@@ -18,19 +29,8 @@ class Star {
   /// The position of the [Star] on the given z-axis.
   double dz;
 
-  /// Creates a [Star].
-  ///
-  /// It will be used to compound the starfield.
-  Star({
-    required this.baseDepth,
-    required this.baseVelocity,
-    required this.dx,
-    required this.dy,
-    required this.dz,
-  });
-
   /// The current [Star]'s radius. This value will be as
-  /// reference on the [CustomPainter].
+  /// reference on the CustomPainter.
   late double radius;
 
   /// Stores the translated [dy] value.

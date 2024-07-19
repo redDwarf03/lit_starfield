@@ -32,18 +32,18 @@ class StarfieldPainter extends CustomPainter {
   late Paint starPaint;
 
   /// Draw a larger [Star] using a consistent size.
-  /// Its size will depend on the current [animation] state. If it is not
+  /// Its size will depend on the current animation state. If it is not
   /// animated, the [Star] will be rendered smaller.
   void drawLargeSizedStar(Canvas canvas, Star star, Paint paint) {
-    canvas.drawCircle(star.translatedOffset, (star.radius * 1.5), paint);
+    canvas.drawCircle(star.translatedOffset, star.radius * 1.5, paint);
   }
 
   /// Draw a smaller [Star] using a variable size, which will be determined
   /// using a random number to achieve a more realistic starfield.
-  /// Its size will depend on the current [animation] state. If it is not
+  /// Its size will depend on the current animation state. If it is not
   /// animated, the [Star] will be using a fixed size.
   void drawSmallSizedStar(Canvas canvas, Star star, Paint paint) {
-    canvas.drawCircle(star.translatedOffset, (star.radius), paint);
+    canvas.drawCircle(star.translatedOffset, star.radius, paint);
   }
 
   /// Transforms the [Star] objects by expanding and translating the
@@ -53,7 +53,7 @@ class StarfieldPainter extends CustomPainter {
   void transformStars(Size size) {
     if (animated) {
       setMovedCallback(true);
-      for (Star star in controller.stars) {
+      for (final star in controller.stars) {
         controller.transformStar(star);
       }
     }
@@ -72,7 +72,7 @@ class StarfieldPainter extends CustomPainter {
   /// Based on the stars index value, either a smaller or a larger start will
   /// be painted to create variety.
   void drawStars(Canvas canvas) {
-    for (int i = 0; i < controller.stars.length - 1; i++) {
+    for (var i = 0; i < controller.stars.length - 1; i++) {
       if (i < controller.stars.length ~/ 15) {
         drawLargeSizedStar(
           canvas,

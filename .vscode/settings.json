@@ -1,0 +1,11 @@
+{
+    "cmake.sourceDirectory": "/Users/SSe/SSe/app/ARCHETHIC/archethic_wallet/windows/flutter",
+    "explorer.experimental.fileNesting.enabled": true,
+    "explorer.experimental.fileNesting.expand": false,
+    "explorer.experimental.fileNesting.patterns": {
+        "pubspec.yaml": ".packages, .metadata, pubspec.lock, analysis_options.yaml, .flutter-plugins, .flutter-plugins-dependencies",
+    },
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "cmake.configureOnOpen": false,
+    "dart.flutterSdkPath": "/Users/SSe/.asdf/installs/flutter/3.22.2-stable/"
+}
